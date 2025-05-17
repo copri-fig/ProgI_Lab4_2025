@@ -64,13 +64,12 @@ public class Main {
                 System.out.println("Ingrese el tipo de via: ");
                 System.out.print("1 == Residencial \n2 == Escolar \n3 == Autopista \n");
                 tipoVia = Integer.parseInt(br.readLine());
+                read = true;
 
                 if(tipoVia > 3 || tipoVia < 1){ //Condición para que el tipo de via sea del 1 al 3
                     System.out.println("Opcion no valida. Escoja un numero del 1 al 3 ");
                     read = false;
                 }
-
-                read = true;
 
             }catch (IOException e){
                 throw new RuntimeException(e);
@@ -83,6 +82,7 @@ public class Main {
         //Objeto de la clase Conductor
         Conductor conductor = new Conductor(velocidadRegistrada, idConductor, nombre, tipoVia);
 
+        //Imprime la informacion de la multa
         conductor.imprimirMulta();
 
     }
