@@ -4,14 +4,16 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        int idConductor;
-        String nombre;
-        int tipoVia;
-        double velocidadRegistrada;
+        int idConductor = 0;
+        String nombre = "";
+        int tipoVia = 0;
+        double velocidadRegistrada = 0;
         boolean read = true;
 
+        //Creación del bufferedreader
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        //Obtener el nombre del conductor
         do{
             try{
                 System.out.println("Ingrese el nombre: ");
@@ -23,6 +25,7 @@ public class Main {
             }
         }while(!read);
 
+        //Obtener el nombre del ID del conductor
         do{
             try{
                 System.out.println("Ingrese la identificacion del conductor: ");
@@ -36,11 +39,17 @@ public class Main {
             }
         }while(!read);
 
+        //Obtener la velocidad registrada
         do {
             try {
                 System.out.println("Ingrese la velocidad registrada: ");
                 velocidadRegistrada = Double.parseDouble(br.readLine());
                 read = true;
+
+                if(velocidadRegistrada < 0){ //Condición para que la velocidad no sea negativa
+                    System.out.println("La velocidad registrada no puede ser negativo.");
+                    read = false;
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } catch (NumberFormatException e) {
@@ -49,17 +58,16 @@ public class Main {
             }
         }while(!read);
 
+        //Obtener el tipo de vía
         do {
             try {
                 System.out.println("Ingrese el tipo de via: ");
-                System.out.print("1 == Residencial \n 2 == Escolar \n 3 == Autopista \n");
+                System.out.print("1 == Residencial \n2 == Escolar \n3 == Autopista \n");
                 tipoVia = Integer.parseInt(br.readLine());
 
-                while(tipoVia > 3 || tipoVia < 1){
+                if(tipoVia > 3 || tipoVia < 1){ //Condición para que el tipo de via sea del 1 al 3
                     System.out.println("Opcion no valida. Escoja un numero del 1 al 3 ");
-                    System.out.println("Ingrese el tipo de via: ");
-                    System.out.print("1 == Residencial \n 2 == Escolar \n 3 == Autopista \n");
-                    tipoVia = Integer.parseInt(br.readLine());
+                    read = false;
                 }
 
                 read = true;
@@ -72,11 +80,10 @@ public class Main {
             }
         }while(!read);
 
-        switch (tipoVia){
-            case 1:
-                Residencial residencial = new Residencial(velocidadRegistrada);
-        }
+        //Objeto de la clase Conductor
+        Conductor conductor = new Conductor(velocidadRegistrada, idConductor, nombre, tipoVia);
 
+        conductor.imprimirMulta();
 
     }
 }
